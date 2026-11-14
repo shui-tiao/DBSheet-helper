@@ -257,7 +257,7 @@ detailBackBtn.addEventListener('click', () => { detailLayerEl.hidden = true })
 copyErrBtn.addEventListener('click', async () => {
   if (!lastError) return
   const lines = [
-    '金山文档拉取器 错误信息',
+    '多维表助手 错误信息',
     '时间：' + lastError.time.toLocaleString('zh-CN'),
     '版本：' + lastError.tag,
     '错误：' + lastError.msg

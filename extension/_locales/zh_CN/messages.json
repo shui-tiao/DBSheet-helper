@@ -1,9 +1,9 @@
 {
   "appName": {
-    "message": "金山文档拉取器"
+    "message": "多维表助手"
   },
   "appDesc": {
-    "message": "一键拉取金山文档表格中指定字段的最新记录"
+    "message": "一键拉取在线表格中指定字段的最新记录"
   },
   "actionTitle": {
     "message": "获取最新记录"

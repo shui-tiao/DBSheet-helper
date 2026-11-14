@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>配置 - 金山文档拉取器</title>
+  <title>配置 - 多维表助手</title>
   <style>
     /* 设计语言：方案 C「一步 · 极简直取」，按 C 稿 options 预览四帧结构落地
        状态带第一屏（Webhook/令牌/数据表逐项状态+就地操作） → 平铺分区（字段胶囊/行为开关/安全/迁移/关于），无手风琴 */
@@ -194,7 +194,7 @@
 <body>
   <div class="opt-head">
     <h2>扩展配置</h2>
-    <div class="sub">金山文档拉取器</div>
+    <div class="sub">多维表助手</div>
   </div>
 
   <!-- 第一屏：连接状态带（状态由 options-status.js 只读推导） -->
@@ -265,7 +265,7 @@
         <button type="button" class="seg-btn" role="radio" aria-checked="false" data-value="dark">暗色</button>
       </div>
     </div></div>
-    <div class="tip">「跟随系统」会随操作系统的深浅色设置自动切换</div>
+    <div class="tip">「跟随系统」会随浏览器的深浅色设置自动切换</div>
   </section>
 
   <!-- 平铺分区：安全 -->
@@ -285,12 +285,12 @@
   <!-- 平铺分区：关于 -->
   <section class="sect" id="sectAbout">
     <div class="s-label">关于</div>
-    <div class="tip">金山文档拉取器是一个独立的浏览器拓展，与金山文档，金山办公，WPS等官方没有任何关联，仅用于个人使用。</div>
+    <div class="tip">多维表助手是一个独立的浏览器拓展，与金山文档，金山办公，WPS等官方没有任何关联，仅用于个人使用。</div>
   </section>
 
   <!-- 底部：关于（所有配置修改即时生效，无保存按钮） -->
   <div class="opt-foot">
-    <div class="about-row"><span id="aboutVersion" class="ver">—</span><span>金山文档拉取器</span></div>
+    <div class="about-row"><span id="aboutVersion" class="ver">—</span><span>多维表助手</span></div>
   </div>
 
   <div id="exportModal" class="modal-mask hidden">
@@ -345,7 +345,7 @@
       <h3>从链接导入</h3>
       <p>粘贴包含配置数据的链接，下一步输入导出时设置的 6 位 PIN 解密还原。</p>
       <label for="importLinkInput">配置链接</label>
-      <input id="importLinkInput" type="text" placeholder="https://shui-tiao.github.io/kdocs-fetcher/docs/#/import?v=1&amp;d=…">
+      <input id="importLinkInput" type="text" placeholder="https://shui-tiao.github.io/DBSheet-helper/docs/#/import?v=1&amp;d=…">
       <div class="modal-actions">
         <button id="importCancelBtn" class="secondary" type="button">取消</button>
         <button id="importConfirmBtn" type="button">下一步</button>

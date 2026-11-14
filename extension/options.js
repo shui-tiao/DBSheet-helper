@@ -630,9 +630,9 @@ cloudClearBtn.addEventListener('click', async () => {
 })
 
 // ===== 导出 / 导入配置链接 =====
-// 链接格式：https://shui-tiao.github.io/kdocs-fetcher/docs/#/import?v=1&d=<密文>&x=<扩展ID>
+// 链接格式：https://shui-tiao.github.io/DBSheet-helper/docs/#/import?v=1&d=<密文>&x=<扩展ID>
 // d 为 base64url 编码的加密配置（放在 hash 中，不会随请求发往服务器）
-const EXPORT_LINK_BASE = 'https://shui-tiao.github.io/kdocs-fetcher/docs'
+const EXPORT_LINK_BASE = 'https://shui-tiao.github.io/DBSheet-helper/docs'
 
 const exportBtn = document.getElementById('exportBtn')
 const exportModal = document.getElementById('exportModal')
