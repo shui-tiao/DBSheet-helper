@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>配置 - 多维表助手</title>
   <style>
     /* 设计语言：方案 C「一步 · 极简直取」，按 C 稿 options 预览四帧结构落地
@@ -35,9 +36,25 @@
     * { box-sizing: border-box; }
     [hidden] { display: none !important; }
     html { background: var(--bg); }
-    body { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; width: 420px; margin: 24px auto 48px; color: var(--ink); font-size: 13px; background: var(--bg); }
+    body { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; width: 100%; max-width: 860px; margin: 24px auto 48px; padding: 0 24px; color: var(--ink); font-size: 13px; background: var(--bg); }
     .opt-head h2 { font-size: 17px; margin: 0 0 2px; font-weight: 700; }
     .opt-head .sub { font-size: 11px; letter-spacing: 1.5px; color: var(--faint); margin: 0 0 16px; }
+
+    /* ===== 分选项卡布局：桌面左侧竖排导航（每区单独一屏），窄屏降级为顶部横向胶囊 ===== */
+    .opt-layout { display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: 32px; align-items: start; }
+    .opt-nav { position: sticky; top: 20px; display: flex; flex-direction: column; gap: 2px; }
+    .opt-nav button { margin: 0; height: 34px; padding: 0 12px; justify-content: flex-start; font-size: 13px; font-weight: 500; background: none; color: var(--muted); border-radius: 8px; }
+    .opt-nav button:hover { background: var(--line-soft); color: var(--ink); }
+    .opt-nav button:active { background: var(--press-bg); }
+    .opt-nav button.on { background: var(--line-soft); color: var(--ink); font-weight: 700; box-shadow: inset 2.5px 0 0 var(--accent); }
+    @media (max-width: 760px) {
+      body { padding: 0 14px 40px; }
+      .opt-layout { display: block; }
+      .opt-nav { position: sticky; top: 0; z-index: 20; flex-direction: row; gap: 6px; overflow-x: auto; padding: 8px 14px; margin: 0 -14px; background: var(--bg); -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .opt-nav::-webkit-scrollbar { display: none; }
+      .opt-nav button { flex: none; height: 30px; padding: 0 14px; border-radius: 999px; font-size: 12.5px; }
+      .opt-nav button.on { background: var(--btn-bg); color: var(--btn-fg); box-shadow: none; }
+    }
 
     /* ===== 连接状态带（第一屏）：一句话 + 状态点回答「现在能不能用」，逐项给状态与就地操作 ===== */
     .status-band { margin: 0 0 4px; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px 10px; background: var(--card); }
@@ -197,7 +214,15 @@
     <div class="sub">多维表助手</div>
   </div>
 
-  <!-- 第一屏：连接状态带（状态由 options-status.js 只读推导） -->
+  <div class="opt-layout">
+    <nav class="opt-nav" id="optNav" aria-label="配置分区">
+      <button type="button" data-panel="fields" class="on">字段与行为</button>
+      <button type="button" data-panel="more">外观与更多</button>
+    </nav>
+    <main class="opt-main">
+
+  <!-- 选项卡一：字段 + 行为（连接状态带只随第一个选项卡显示） -->
+  <div class="opt-panel" data-panel="fields">
   <div id="connStatus" class="status-band busy">
     <div class="line1"><span class="sdot"></span><span id="connStatusText">正在读取配置…</span><button id="bandWizardBtn" class="act-btn" type="button" title="覆盖 / 重新配置">打开配置向导</button></div>
     <div class="line2" id="connStatusSub">从本地存储读取已保存的连接信息</div>
@@ -217,7 +242,7 @@
     </div>
   </div>
 
-  <!-- 平铺分区：字段（只读胶囊 + 「管理」进入编辑态：增删/拖拽，退出即自动保存） -->
+  <!-- 分区：字段（只读胶囊 + 「管理」进入编辑态：增删/拖拽，退出即自动保存） -->
   <section class="sect" id="sectFields">
     <div class="s-label">字段</div>
     <div id="fieldChips" class="field-chips"></div>
@@ -229,7 +254,7 @@
     <div class="tip">点击管理按钮可以添加、删除、排序字段</div>
   </section>
 
-  <!-- 平铺分区：行为 -->
+  <!-- 分区：行为 -->
   <section class="sect" id="sectBehavior">
     <div class="s-label">行为</div>
     <label class="f-row" for="autoFetch"><span class="nm">点击图标时自动拉取</span><input id="autoFetch" type="checkbox" class="switch" checked></label>
@@ -255,7 +280,10 @@
     <div class="tip">浏览器不支持侧边栏时会自动改用弹窗</div>
   </section>
 
-  <!-- 平铺分区：外观 -->
+    </div>
+
+    <div class="opt-panel" data-panel="more" hidden>
+  <!-- 分区：外观 -->
   <section class="sect" id="sectAppearance">
     <div class="s-label">外观</div>
     <div class="f-row"><span class="nm">主题</span><div class="v">
@@ -268,13 +296,13 @@
     <div class="tip">「跟随系统」会随浏览器的深浅色设置自动切换</div>
   </section>
 
-  <!-- 平铺分区：安全 -->
+  <!-- 分区：安全 -->
   <section class="sect" id="sectSecurity">
     <div class="s-label">安全</div>
     <div class="f-row"><span class="nm">锁定扩展</span><span class="v">锁定后不发起任何请求</span><button id="lockBtn" class="act-btn warn" type="button">锁定</button></div>
   </section>
 
-  <!-- 平铺分区：配置迁移 -->
+  <!-- 分区：配置迁移 -->
   <section class="sect" id="sectMigration">
     <div class="s-label">配置迁移</div>
     <div id="migrationStats" class="migration-stats"></div>
@@ -282,11 +310,15 @@
     <div class="f-row"><span class="nm">云端数据</span><span class="v">将数据加密写入浏览器账号，不保证可靠</span><button id="cloudLayerBtn" class="act-btn" type="button">打开</button></div>
   </section>
 
-  <!-- 平铺分区：关于 -->
+  <!-- 分区：关于 -->
   <section class="sect" id="sectAbout">
     <div class="s-label">关于</div>
     <div class="tip">多维表助手是一个独立的浏览器拓展，与金山文档，金山办公，WPS等官方没有任何关联，仅用于个人使用。</div>
   </section>
+
+    </div>
+    </main>
+  </div>
 
   <!-- 底部：关于（所有配置修改即时生效，无保存按钮） -->
   <div class="opt-foot">
@@ -397,5 +429,21 @@
   <script src="migration.js"></script>
   <script src="options.js"></script>
   <script src="options-status.js"></script>
+  <script>
+    // 分选项卡：点击导航只显示对应面板；面板显隐不影响各脚本的元素引用与状态推导
+    ;(function () {
+      const nav = document.getElementById('optNav')
+      if (!nav) return
+      const panels = Array.from(document.querySelectorAll('.opt-panel'))
+      nav.addEventListener('click', (e) => {
+        const btn = e.target instanceof Element ? e.target.closest('button[data-panel]') : null
+        if (!btn) return
+        for (const b of nav.querySelectorAll('button[data-panel]')) b.classList.toggle('on', b === btn)
+        const key = btn.dataset.panel
+        for (const p of panels) p.hidden = p.dataset.panel !== key
+        try { window.scrollTo({ top: 0 }) } catch (_) { window.scrollTo(0, 0) }
+      })
+    })()
+  </script>
 </body>
 </html>

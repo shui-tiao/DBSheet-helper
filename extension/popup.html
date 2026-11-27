@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>多维表助手</title>
   <style>
     /* 设计语言：方案 C「一步 · 极简直取」黑白灰 + #ffd23f */
@@ -30,6 +31,10 @@
       font-size: 13px; line-height: 1.6; position: relative;
     }
     body.in-panel { width: 100%; }
+    /* 手机上以整页打开时占满屏宽，不再按桌面视口缩小渲染 */
+    @media (max-width: 400px) {
+      body { width: 100%; max-height: none; }
+    }
 
     /* 顶栏 */
     .top { display: flex; align-items: center; padding: 12px 16px 0; }
