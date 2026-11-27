@@ -887,3 +887,18 @@ chrome.storage.local.get('pendingImport', async (res) => {
   chrome.storage.local.remove('pendingImport')
   beginImport(backup)
 })
+
+// 分选项卡：点击导航只显示对应面板；面板显隐不影响各脚本的元素引用与状态推导
+;(function () {
+  const nav = document.getElementById('optNav')
+  if (!nav) return
+  const panels = Array.from(document.querySelectorAll('.opt-panel'))
+  nav.addEventListener('click', (e) => {
+    const btn = e.target instanceof Element ? e.target.closest('button[data-panel]') : null
+    if (!btn) return
+    for (const b of nav.querySelectorAll('button[data-panel]')) b.classList.toggle('on', b === btn)
+    const key = btn.dataset.panel
+    for (const p of panels) p.hidden = p.dataset.panel !== key
+    try { window.scrollTo({ top: 0 }) } catch (_) { window.scrollTo(0, 0) }
+  })
+})()
