@@ -31,8 +31,10 @@
       font-size: 13px; line-height: 1.6; position: relative;
     }
     body.in-panel { width: 100%; }
-    /* 手机上以整页打开时占满屏宽，不再按桌面视口缩小渲染 */
-    @media (max-width: 400px) {
+    /* 手机上以整页打开时占满屏宽，不再按桌面视口缩小渲染。
+       加 pointer: coarse 限定触屏设备：桌面弹窗视口同样只有 340px，
+       若不限定的会误命中并解除 600px 高度上限 */
+    @media (max-width: 400px) and (pointer: coarse) {
       body { width: 100%; max-height: none; }
     }
 
